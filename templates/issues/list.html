@@ -3,3 +3,69 @@
 {% block title %} Issues {% endblock title %}
 
 {% block content %}
+<h1>Issues</h1>
+<div class="container text-center">
+    <div class="row align-items-start">
+        <div class="col">
+            <h2></h2>
+            {% for issue in to_do_list %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ issue.title }} </h5>
+                    <span
+                        class="badge {% if issue.priority.name|lower == 'low' %}bg-success{% elif issue.priority.name|lower == 'medium' %}bg-warning {% elif issue.priority.name|lower == 'high' %}bg-danger{% endif %}">
+                        <h6 class="card-title">{{ issue.priority }} </h6>
+                    </span>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ issue.summary}} </h6>
+                    <small>By: {{ issue.assignee }} | On: {{ issue.created_on }} | Status: {{ issue.status }} </small>
+                    <p class="card-text">{{ issue.description|truncatechars:128 }}</p>
+
+                    <a href="{% url 'detail' issue.id %}" class="card-link">Continue reading...</a>
+                </div>
+            </div>
+            <br />
+            {% endfor %}
+        </div>
+        <div class="col">
+            {% for issue in in_progress_list %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ issue.title }} </h5>
+                    <span
+                        class="badge {% if issue.priority.name|lower == 'low' %}bg-success{% elif issue.priority.name|lower == 'medium' %}bg-warning {% elif issue.priority.name|lower == 'high' %}bg-danger{% endif %}">
+                        <h6 class="card-title">{{ issue.priority }} </h6>
+                    </span>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ issue.summary}} </h6>
+                    <small>By: {{ issue.assignee }} | On: {{ issue.created_on }} | Status: {{ issue.status }} </small>
+                    <p class="card-text">{{ issue.description|truncatechars:128 }}</p>
+
+                    <a href="{% url 'detail' issue.id %}" class="card-link">Continue reading...</a>
+                </div>
+            </div>
+            <br />
+            {% endfor %}
+        </div>
+        <div class="col">
+            {% for issue in done_list %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ issue.title }} </h5>
+                    <span
+                        class="badge {% if issue.priority.name|lower == 'low' %}bg-success{% elif issue.priority.name|lower == 'medium' %}bg-warning {% elif issue.priority.name|lower == 'high' %}bg-danger{% endif %}">
+                        <h6 class="card-title">{{ issue.priority }} </h6>
+                    </span>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ issue.summary}} </h6>
+                    <small>By: {{ issue.assignee }} | On: {{ issue.created_on }} | Status: {{ issue.status }} </small>
+                    <p class="card-text">{{ issue.description|truncatechars:128 }}</p>
+
+                    <a href="{% url 'detail' issue.id %}" class="card-link">Continue reading...</a>
+                </div>
+            </div>
+            <br />
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<br />
+
+{% endblock content %}

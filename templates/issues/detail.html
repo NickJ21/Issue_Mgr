@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Detail{% endblock title %}
+
+{% block content %}
+<h1>{{ issue.title }} </h1>
+<h3>{{ issue.summary }} </h3>
+<small>By: {{issue.assignee}} | Created on: {{ issue.created_on }} | Status: {{ issue.status }} </small>
+<p>{{ issue.description }} </p>
+{% if user.is_authenticated %}
+{% if user == issue.assignee %}
+<a href="{% url 'edit' issue.id %}" class="btn btn-primary">Edit</a>
+<a href="{% url 'delete' issue.id %}" class="btn btn-danger">Delete</a>
+{% endif %}
+{% endif %}
+
+{% endblock content %}

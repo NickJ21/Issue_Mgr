@@ -19,7 +19,7 @@ class IssueListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = self.request.user()
+        user = self.request.user
         role = Role.objects.get(name="product owner")
         team_po = (
             CustomUser.objects
@@ -28,7 +28,7 @@ class IssueListView(LoginRequiredMixin, ListView):
         )
         to_do = Status.objects.get(name="to do")
         context["to_do_list"] = (
-            Issues.objects
+            Issue.objects
             .filter(status=to_do)
             .filter(reporter=team_po[0])
         )
